@@ -1,12 +1,13 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateUserDto} from './dto/create-user.dto'   ;
 import { hash } from 'bcryptjs';
-import { UsersRepositories } from 'src/shared/database/repositories/users.repositories';
+import { UsersRepository } from 'src/shared/database/repositories/users.repositories';
+
 
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepo: UsersRepositories){}
+  constructor(private readonly usersRepo: UsersRepository){}
   
   async create(createUserDto: CreateUserDto) {
 
@@ -24,7 +25,7 @@ export class UsersService {
 
     const hashedPassword = await hash(password, 12)
 
-    const user = this.usersRepo.create(
+    const user = await this.usersRepo.create(
       {
         data: {
           name,
@@ -54,7 +55,12 @@ export class UsersService {
       }
     );
 
-    return user
+
+
+    return {
+      user: user.name,
+      email: user.email
+    }
   }
 
 }
