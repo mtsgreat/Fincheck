@@ -10,9 +10,8 @@ export class UsersController {
 constructor(private readonly usersService: UsersService){}
 
     @Get('/me')
-    me(@Req() reaquest: any){
-     console.log(reaquest.userId)
-     return this.usersService.getUserById('userId')
+    me(@Req() request: any){
+     return this.usersService.getUserById(request.userId)
     }
 
 }
