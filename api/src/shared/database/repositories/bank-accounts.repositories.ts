@@ -29,4 +29,9 @@ export class BankAccountsRepository {
     }
 
 
+    delete(deleteDto: Prisma.BankAccountDeleteArgs){
+        return this.prismaService.bankAccount.delete(deleteDto)
+    }
+
+
 }
