@@ -6,6 +6,7 @@ import { validateTransactionOwnershipService } from './validate-transaction-owne
 import { TransactionsRepository } from 'src/shared/database/repositories/transactions.repositories';
 import { CreateTransactionDto } from '../dto/create-transaction.dto';
 import { UpdateTransactionDto } from '../dto/update-transaction.dto';
+import { TransactionType } from '../entities/Transaction';
 
 
 @Injectable()
@@ -41,11 +42,20 @@ export class TransactionsService {
     })
   }
 
-  findAllByUserId(userId: string, filters: {month: number, year: number}) {
-    
+  findAllByUserId(
+    userId: string, 
+    filters: {
+      month: number, 
+      year: number, 
+      bankAccountId: string, 
+      type: TransactionType
+    },
+  ) {
     return this.transactionsRepo.findMany({
       where: { 
         userId,
+        bankAccountId: filters.bankAccountId,
+        type: filters.type,
         date: {
           gte: new Date(Date.UTC(filters.year, filters.month)),
           lte: new Date(Date.UTC(filters.year, filters.month + 1))
