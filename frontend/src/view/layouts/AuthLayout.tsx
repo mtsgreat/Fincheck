@@ -1,14 +1,22 @@
 import illustration from "../../assets/illustration.png"
 import logoGreen from "../../assets/logo-green.svg"
+import logoGray from "../../assets/logo-gray.svg"
+import { Outlet } from "react-router-dom"
 
 
 export function AuthLayout(){
     return (
          <div className="flex w-full h-full">
 
-            <div className="w-1/2 h-full"></div>
+            <div className="w-full h-full flex items-center justify-center flex-col lg:w-1/2">
+              <img className="h-6" src={logoGray} alt="" />
 
-            <div className="w-1/2 h-full flex justify-center items-center p-8 relative select-none">
+              <div className="mt-16 w-full max-w-[504px] px-8">
+                <Outlet/>
+              </div>
+            </div>
+
+            <div className="w-1/2 h-full  justify-center items-center p-8 relative select-none hidden lg:flex">
                 <img
                 src={illustration}
                 alt=""
