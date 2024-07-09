@@ -1,17 +1,18 @@
-import { ComponentProps } from "react";
+import { ComponentProps, forwardRef } from "react";
 
 interface InputProps extends ComponentProps<'input'>{
     name: string
 }
 
 
-export function Input( {name,  placeholder, id ,...props} : InputProps){
+export const Input = forwardRef<HTMLInputElement, InputProps>( ( {name,  placeholder, id ,...props} , ref) => {
     const inputId = id ?? name
 
     return (
         <div className="relative">
             <input
             {...props}
+            ref={ref}
             name={name}
             id={inputId}
             className="bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] text-gray-800 pt-4 placeholder-shown: peer  placeholder-shown:pt-0  placeholder-shown:border-gray-500 transition-all outline-none"
@@ -26,4 +27,4 @@ export function Input( {name,  placeholder, id ,...props} : InputProps){
         </div>
 
     )
-}
+})
