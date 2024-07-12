@@ -1,6 +1,11 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useMutation } from "@tanstack/react-query"
+import { SigninParams } from "../../../app/services/authService/signin"
+import { authService } from "../../../app/services/authService"
+import toast from "react-hot-toast"
+import { useAuth } from "../../../app/hooks/useAuth"
 
 const schema = z.object({
     email: z.string()
@@ -22,9 +27,27 @@ export function useLoginController(){
     resolver: zodResolver(schema)
  })
 
- const handleSubmit = hookFormHandleSubmit((data) => {
 
-    console.log("Form login Submetido", data)
+ const { isPending, mutateAsync } = useMutation({
+    mutationKey:['signin'],
+    mutationFn: async (data: SigninParams) => {
+       return authService.signin(data)
+    }
+   })
+
+   const { signin } = useAuth()
+
+   const handleSubmit = hookFormHandleSubmit( async (data) => {
+
+    try {
+         const { acessToken } = await mutateAsync(data)
+         signin(acessToken)
+        // console.log(acessToken)
+
+    } catch (error: any) {
+        // console.log('erroteste', error.response.data.message)
+        toast.error(error.response.data.message)
+    }
  })
 
 
@@ -34,6 +57,7 @@ export function useLoginController(){
  return {
     handleSubmit,
     register,
-    errors
+    errors,
+    isPending
  }
 }

@@ -11,7 +11,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>( ( {name,  placeho
     const inputId = id ?? name
 
 
-    console.log(inputId)
 
     return (
         <div className="relative">
