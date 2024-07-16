@@ -7,6 +7,15 @@ import { authService } from "../../../app/services/authService"
 import toast from "react-hot-toast"
 import { useAuth } from "../../../app/hooks/useAuth"
 
+
+interface ErrorResponse {
+   response: {
+       data: {
+           message: string;
+       };
+   };
+}
+
 const schema = z.object({
     email: z.string()
         .min(1, 'E-mail é obrigatório')
@@ -44,9 +53,9 @@ export function useLoginController(){
          signin(acessToken)
         // console.log(acessToken)
 
-    } catch (error: any) {
-        // console.log('erroteste', error.response.data.message)
-        toast.error(error.response.data.message)
+    } catch (error) {
+        const typeError = error as ErrorResponse
+        toast.error(typeError.response.data.message)
     }
  })
 
