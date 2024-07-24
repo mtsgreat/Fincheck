@@ -1,9 +1,9 @@
 import { CashIcon } from "./CashIcon";
-import { CheckingIcon } from "./CheckingIcon";
+import { ChekingIcon } from "./ChekingIcon";
 import { InvestmentIcon } from "./InvestmentIcon";
 
 export const iconsMap = {
-  CHECKING: CheckingIcon,
-  INVESTMENT: InvestmentIcon,
-  CASH: CashIcon,
-};
+    CHEKING: ChekingIcon,
+    INVESTMENT: InvestmentIcon,
+    CASH: CashIcon
+}
