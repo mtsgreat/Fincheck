@@ -7,9 +7,14 @@ import { SliderOptions } from "./SliderOprions";
 import { SliderNavigation } from "./SliderNavigation";
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
+import { cn } from "../../../../../app/utils/cn";
+
+import { useTransactionsController } from "./useTransactionsController";
 
 
 export function Transactions(){
+   const { areValuesVisible } = useTransactionsController()
+
     return (
         <div className="bg-gray-100 rounded-xl w-full h-full p-10 flex flex-col">
             <header>
@@ -51,7 +56,12 @@ export function Transactions(){
                             <span className="text-sm text-gray-600">13/10/2024</span>
                         </div>
                     </div>
-                    <span className="text-red-600 tracking-[-0.5px] font-medium">
+                    <span
+                    className={cn(
+                        'text-red-600 tracking-[-0.5px] font-medium',
+                        areValuesVisible && 'blur-sm'
+                    )}
+                    >
                         - {formatCurrency(122)}
                     </span>
                 </div>
@@ -64,7 +74,12 @@ export function Transactions(){
                             <span className="text-sm text-gray-600">13/10/2024</span>
                         </div>
                     </div>
-                    <span className="text-green-600 tracking-[-0.5px] font-medium">
+                    <span
+                     className={cn(
+                        'text-green-600 tracking-[-0.5px] font-medium',
+                        areValuesVisible && 'blur-sm'
+                     )}
+                     >
                         {formatCurrency(122)}
                     </span>
                 </div>
