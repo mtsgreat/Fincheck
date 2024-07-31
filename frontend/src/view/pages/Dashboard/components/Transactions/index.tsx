@@ -5,11 +5,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { MONTHS } from "../../../../../app/config/contants";
 import { SliderOptions } from "./SliderOprions";
 import { SliderNavigation } from "./SliderNavigation";
+import { formatCurrency } from "../../../../../app/utils/formatCurrency";
+import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
 
 
 export function Transactions(){
     return (
-        <div className="bg-gray-100 rounded-xl w-full h-full p-10">
+        <div className="bg-gray-100 rounded-xl w-full h-full p-10 flex flex-col">
             <header>
                 <div className="flex items-center justify-between">
                     <button className="flex items-center gap-2">
@@ -40,9 +42,35 @@ export function Transactions(){
                 </div>
             </header>
 
-            {/* <div className="bg-red-500 mt-4">
-                conteudo
-            </div> */}
+            <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
+                <div className="bg-white  p-4 rounded-2xl flex items-center justify-between gap-4">
+                    <div className="flex-1 flex items-center gap-3">
+                        <CategoryIcon type="expense"/>
+                        <div>
+                            <strong className="font-bold tracking-[-0.5px] block">Lanche</strong>
+                            <span className="text-sm text-gray-600">13/10/2024</span>
+                        </div>
+                    </div>
+                    <span className="text-red-600 tracking-[-0.5px] font-medium">
+                        - {formatCurrency(122)}
+                    </span>
+                </div>
+
+                <div className="bg-white  p-4 rounded-2xl flex items-center justify-between gap-4">
+                    <div className="flex-1 flex items-center gap-3">
+                        <CategoryIcon type="income"/>
+                        <div>
+                            <strong className="font-bold tracking-[-0.5px] block">Lanche</strong>
+                            <span className="text-sm text-gray-600">13/10/2024</span>
+                        </div>
+                    </div>
+                    <span className="text-green-600 tracking-[-0.5px] font-medium">
+                        {formatCurrency(122)}
+                    </span>
+                </div>
+            </div>
+
+
         </div>
     )
 }
