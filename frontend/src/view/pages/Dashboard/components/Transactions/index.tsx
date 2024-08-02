@@ -10,14 +10,23 @@ import { CategoryIcon } from "../../../../components/icons/categories/CategoryIc
 import { cn } from "../../../../../app/utils/cn";
 
 import { useTransactionsController } from "./useTransactionsController";
+import { Spinner } from "../../../../components/Spinner";
 
 
 export function Transactions(){
-   const { areValuesVisible } = useTransactionsController()
+   const { areValuesVisible, isLoading } = useTransactionsController()
 
     return (
         <div className="bg-gray-100 rounded-xl w-full h-full p-10 flex flex-col">
-            <header>
+        {isLoading && (
+            <div className="w-full h-full flex items-center justify-center">
+                <Spinner className="w-12 h-12"/>
+            </div>
+          )}
+
+         {!isLoading && (
+            <>
+                 <header>
                 <div className="flex items-center justify-between">
                     <button className="flex items-center gap-2">
                         <TransactionsIcon/>
@@ -85,6 +94,8 @@ export function Transactions(){
                 </div>
             </div>
 
+            </>
+         )}
 
         </div>
     )
