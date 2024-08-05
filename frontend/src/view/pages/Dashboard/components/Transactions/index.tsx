@@ -11,20 +11,23 @@ import { cn } from "../../../../../app/utils/cn";
 
 import { useTransactionsController } from "./useTransactionsController";
 import { Spinner } from "../../../../components/Spinner";
+import emptyStateImage from '../../../../../assets/empty-state.svg'
 
 
 export function Transactions(){
-   const { areValuesVisible, isLoading } = useTransactionsController()
+   const { areValuesVisible, isInitialLoading, isLoading,  transactions } = useTransactionsController()
+
+   const hasTransactions = transactions.length > 0
 
     return (
         <div className="bg-gray-100 rounded-xl w-full h-full p-10 flex flex-col">
-        {isLoading && (
+        {isInitialLoading && (
             <div className="w-full h-full flex items-center justify-center">
                 <Spinner className="w-12 h-12"/>
             </div>
           )}
 
-         {!isLoading && (
+         {!isInitialLoading && (
             <>
                  <header>
                 <div className="flex items-center justify-between">
@@ -57,7 +60,23 @@ export function Transactions(){
             </header>
 
             <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-                <div className="bg-white  p-4 rounded-2xl flex items-center justify-between gap-4">
+
+               {isLoading && (
+                <div className="h-full flex flex-col items-center justify-center">
+                    <Spinner className="w-12 h-12"/>
+                </div>
+               )}
+
+              {(!hasTransactions && !isLoading) && (
+                <div className="h-full flex flex-col items-center justify-center">
+                    <img src={emptyStateImage} alt="Empty State" />
+                    <p className="text-gray-700">Não encontramos nenhuma transação!</p>
+                </div>
+              )}
+
+              {(hasTransactions && !isLoading)  && (
+                <>
+                  <div className="bg-white  p-4 rounded-2xl flex items-center justify-between gap-4">
                     <div className="flex-1 flex items-center gap-3">
                         <CategoryIcon type="expense"/>
                         <div>
@@ -92,6 +111,8 @@ export function Transactions(){
                         {formatCurrency(122)}
                     </span>
                 </div>
+                </>
+              )}
             </div>
 
             </>
