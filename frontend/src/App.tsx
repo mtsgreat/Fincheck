@@ -24,7 +24,7 @@ export function App(){
 
             <Toaster position="bottom-left"/>
         </AuthProvider>
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
   )
 }
