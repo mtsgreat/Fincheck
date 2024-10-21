@@ -1,4 +1,4 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import * as RdxDialog from '@radix-ui/react-dialog';
 import { cn } from '../../app/utils/cn';
 import { Cross2Icon } from '@radix-ui/react-icons';
 
@@ -15,14 +15,14 @@ interface ModalPrps {
 
 export function Modal({ open, title, rigthAction, onClose,   children }: ModalPrps){
     return (
-        <Dialog.Root open={ open } onOpenChange={onClose}>
+        <RdxDialog.Root open={ open } onOpenChange={onClose}>
 
-        <Dialog.Portal>
-          <Dialog.Overlay className={cn(
+        <RdxDialog.Portal>
+          <RdxDialog.Overlay className={cn(
             'bg-black/80 fixed inset-0 z-50 backdrop-blur-sm',
             'data-[state=open]:animate-overlay-show'
           )} />
-          <Dialog.Content className={cn(
+          <RdxDialog.Content className={cn(
             'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 space-y-10 bg-white rounded-2xl z-[51] shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] w-full max-w-[400px] outline-none',
             'data-[state=open]:animate-content-show',
           )}>
@@ -36,9 +36,9 @@ export function Modal({ open, title, rigthAction, onClose,   children }: ModalPr
                 <Cross2Icon className='w-6 h-6'/>
               </button>
 
-              <Dialog.Title className='text-lg tracking-[-1px] font-bold'>
+              <RdxDialog.Title className='text-lg tracking-[-1px] font-bold'>
                  { title }
-              </Dialog.Title>
+              </RdxDialog.Title>
 
               <div className='h-12 w-12 flex items-center justify-center'>
                 { rigthAction }
@@ -49,9 +49,9 @@ export function Modal({ open, title, rigthAction, onClose,   children }: ModalPr
              { children }
            </div>
 
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
+          </RdxDialog.Content>
+        </RdxDialog.Portal>
+      </RdxDialog.Root>
     )
 }
 
