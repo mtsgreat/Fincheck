@@ -1,3 +1,5 @@
+import { Button } from "../../../../components/Button";
+import { ColorsDropdownInput } from "../../../../components/ColorsDropdownInput";
 import { Input } from "../../../../components/Input";
 import { InputCurrency } from "../../../../components/InputCurrency";
 import { Modal } from "../../../../components/Modal";
@@ -28,7 +30,21 @@ export function NewAccountModal(){
                     placeholder="Nome da Conta"
                 />
 
-                <Select />
+                <Select
+                    placeholder="Tipo" 
+                    //error="asdads" 
+                    options={[
+                        {value: 'INVESTMENT', label: 'Investimentos'},
+                        {value: 'CHECKING', label: 'Conta Corrente'},
+                        {value: 'CASH', label: 'Dinheiro Físico'},
+                    ]}
+                />
+
+                <ColorsDropdownInput/>
+
+                <Button type="submit" className="w-full">
+                    Criar
+                </Button>
             </div>
          </form>
         </Modal>
