@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Button } from "../../../../components/Button";
-import { DatePickerInput } from "../../../../components/DatePickerInput";
+//import { DatePickerInput } from "../../../../components/DatePickerInput";
 import { Input } from "../../../../components/Input";
 import { InputCurrency } from "../../../../components/InputCurrency";
 import { Modal } from "../../../../components/Modal";
@@ -10,6 +11,15 @@ export function NewTransactionModal(){
     const {closeNewTransactionModal, isNewTransactionModalOpen, newTransactionType } = useNewTransactionModalController()
 
     const isExpense = newTransactionType === 'EXPENSE'
+
+
+    const [date, setDate] = useState('');
+
+    const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const selectedDate = event.target.value;
+      setDate(selectedDate)
+    };
+   
 
     return (
         <Modal 
@@ -55,7 +65,13 @@ export function NewTransactionModal(){
                     ]}
                 />
 
-                <DatePickerInput/>
+                
+                <input 
+                    className="'bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] text-gray-800 placeholder-shown: peer  placeholder-shown:pt-0  placeholder-shown:border-gray-500 transition-all outline-none" 
+                    type="date" 
+                    value={date}
+                    onChange={handleDateChange}
+                />
 
                 <Button type="submit" className="w-full">
                     Criar

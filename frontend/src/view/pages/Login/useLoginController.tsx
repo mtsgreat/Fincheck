@@ -31,7 +31,7 @@ export function useLoginController(){
   const {
     register,
     handleSubmit: hookFormHandleSubmit,
-    formState: {errors }
+    formState: {errors },
  } = useForm<FormData>({
     resolver: zodResolver(schema)
  })
